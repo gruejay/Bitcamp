@@ -1,0 +1,5 @@
+value,count,percentage
+Neither,23,0.07419354838709677
+Morphological but no compound,254,0.8193548387096774
+Compound but no morphological,9,0.02903225806451613
+Both,24,0.07741935483870968

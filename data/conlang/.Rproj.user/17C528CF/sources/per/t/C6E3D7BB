@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555121944799.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1537059955",
+    "id" : "C6E3D7BB",
+    "lastKnownWriteTime" : 1555123215,
+    "last_content_update" : 1555123215779,
+    "path" : "~/conlang/word_order.r",
+    "project_path" : "word_order.r",
+    "properties" : {
+        "cursorPosition" : "7,48",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

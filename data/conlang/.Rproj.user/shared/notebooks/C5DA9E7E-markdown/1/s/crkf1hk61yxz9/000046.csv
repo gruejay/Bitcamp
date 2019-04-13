@@ -1,0 +1,37 @@
+"0","library(rvest)"
+"0","source(""wals_value_table_getter.r"")"
+"0","base_url <- ""https://wals.info/feature/"""
+"0","feature_df_names <- read_csv(""Parameters.csv"") %>%"
+"0","  select(4,7)"
+"2","Parsed with column specification:
+cols(
+  blog_title = [33mcol_logical()[39m,
+  contribution_pk = [32mcol_double()[39m,
+  description = [33mcol_logical()[39m,
+  id = [31mcol_character()[39m,
+  jsondata = [31mcol_character()[39m,
+  markup_description = [33mcol_logical()[39m,
+  name = [31mcol_character()[39m,
+  ordinal_qualifier = [31mcol_character()[39m,
+  pk = [32mcol_double()[39m,
+  representation = [32mcol_double()[39m
+)
+"
+"0","each_table <- function(id, name) {"
+"0","  wals_value_table_getter(paste(base_url, id, sep=""""))"
+"0","}"
+"0","ids <- vector(""list"")"
+"0","names <- vector(""list"")"
+"0","dfs <- vector(""list"")"
+"0","for (row in 1:nrow(feature_df_names)) {"
+"0","  id <- feature_df_names[row, ""id""]"
+"0","  name <- feature_df_names[row, ""name""]"
+"0","  df <- wals_value_table_getter(paste(base_url, id, sep=""""))"
+"0","  "
+"0","  ids <- append(ids,id)"
+"0","  names <- append(names,name)"
+"0","  dfs <- append(dfs,list(df))"
+"0","  "
+"0","}"
+"0","feature_df <- tibble(ids, names, dfs)"
+"0","  "

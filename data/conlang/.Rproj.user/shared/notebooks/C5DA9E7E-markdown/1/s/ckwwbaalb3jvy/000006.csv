@@ -1,0 +1,15 @@
+"0","library(tidyverse)"
+"0","library(RPostgreSQL)"
+"0","pw <- {"
+"0","  ""DaddyNelsonCokeSalesman"""
+"0","}"
+"0","# loads the PostgreSQL driver"
+"0","drv <- dbDriver(""PostgreSQL"")"
+"0","# creates a connection to the postgres database"
+"0","# note that ""con"" will be used later in each connection to the database"
+"0","con <- dbConnect(drv, dbname = ""postgres"","
+"0","                 host = ""localhost"", port = 5432,"
+"0","                 user = ""postgres"", password = pw)"
+"2","Error in postgresqlNewConnection(drv, ...) : 
+  RS-DBI driver: (@Ñcannot allocate a new connection -- maximum of 16 connections already opened)
+"

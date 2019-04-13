@@ -1,0 +1,21 @@
+library(tidyverse)
+library(rvest)
+
+
+
+df_word_order_getter <- function () {
+  
+  url_word_order <- "https://wals.info/feature/81A#2/18.0/153.1"
+  
+  url_word_order %>%
+  read_html() %>%
+  html_node(".span4") %>%
+  html_node(".table") %>%
+  html_table() %>%
+  select(2:3) %>%
+  magrittr::set_colnames(c("Order", "Count")) %>%
+  as_tibble()
+  
+}
+
+

@@ -1,0 +1,7 @@
+value,count,percentage
+No nominal plural,28,0.09621993127147767
+"Only human nouns, optional",20,0.06872852233676977
+"Only human nouns, obligatory",40,0.13745704467353953
+"All nouns, always optional",55,0.18900343642611683
+"All nouns, optional in inanimates",15,0.05154639175257732
+"All nouns, always obligatory",133,0.4570446735395189

@@ -1,0 +1,67 @@
+---
+title: "CADLang"
+author: "Aviv Elazar-Mittelman"
+date: "April 12, 2019"
+output: html_document
+---
+
+Connection to the PostgreSQL server. Must be launched to pull database.
+```{r dbSetup}
+library(tidyverse)
+library(RPostgreSQL)
+
+pw <- {
+  "DaddyNelsonCokeSalesman"
+}
+
+# loads the PostgreSQL driver
+drv <- dbDriver("PostgreSQL")
+# creates a connection to the postgres database
+# note that "con" will be used later in each connection to the database
+con <- dbConnect(drv, dbname = "postgres",
+                 host = "localhost", port = 5432,
+                 user = "postgres", password = pw)
+rm(pw) # removes the password
+
+```
+
+Loads The various features value counts into dataframes.
+
+```{r getFeatures}
+library(rvest)
+source("wals_value_table_getter.r")
+base_url <- "https://wals.info/feature/"
+
+feature_df_names <- read_csv("Parameters.csv") %>%
+  select(4,7)
+
+
+each_table <- function(id, name) {
+  wals_value_table_getter(paste(base_url, id, sep=""))
+}
+
+ids <- vector("list")
+names <- vector("list")
+dfs <- vector("list")
+
+for (row in 1:nrow(feature_df_names)) {
+  id <- feature_df_names[row, "id"]
+  name <- feature_df_names[row, "name"]
+  df <- wals_value_table_getter(paste(base_url, id, sep=""))
+  
+  ids <- append(ids,id)
+  names <- append(names,name)
+  dfs <- append(dfs,list(df))
+  
+}
+
+feature_df <- tibble(ids, names, dfs)
+
+```
+```{r save_tables}
+library(fs)
+for (row in 1:nrow(feature_df)) {
+  write_csv(feature_df[3][[1]][[row]],paste("tables/",path_sanitize(paste(feature_df[1][[1]][[row]]," ",feature_df[2][[1]][[row]],".csv", sep=""))))
+}
+```
+

@@ -1,0 +1,4 @@
+"0","library(fs)"
+"0","for (row in 1:nrow(feature_df)) {"
+"0","  write_csv(feature_df[3][[1]][[row]],paste(""tables/"",path_sanitize(paste(feature_df[1][[1]][[row]],"" "",feature_df[2][[1]][[row]],"".csv"", sep=""""))))"
+"0","}"

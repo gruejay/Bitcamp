@@ -1,0 +1,9 @@
+value,count,percentage
+Left-edge: First or second,37,0.074
+Left-oriented: One of the first three,2,0.004
+Right-edge: Ultimate or penultimate,65,0.13
+Right-oriented: One of the last three,27,0.054
+Unbounded: Stress can be anywhere,54,0.108
+Combined: Right-edge and unbounded,8,0.016
+Not predictable,26,0.052
+Fixed stress (no weight-sensitivity),281,0.562

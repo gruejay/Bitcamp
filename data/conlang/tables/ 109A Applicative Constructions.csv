@@ -1,0 +1,9 @@
+value,count,percentage
+Benefactive object; both bases,16,0.08743169398907104
+Benefactive object; only transitive,4,0.02185792349726776
+Benefactive and other; both bases,49,0.2677595628415301
+Benefactive and other; only transitive,2,0.01092896174863388
+Non-benefactive object; both bases,9,0.04918032786885246
+Non-benefactive object; only transitive,1,0.00546448087431694
+Non-benefactive object; only intransitive,2,0.01092896174863388
+No applicative construction,100,0.546448087431694

@@ -1,0 +1,7 @@
+value,count,percentage
+In 3rd person + 1st and/or 2nd person,18,0.047619047619047616
+"3rd person only, but also non-singular",42,0.1111111111111111
+3rd person singular only,61,0.16137566137566137
+1st or 2nd person but not 3rd,2,0.005291005291005291
+3rd person non-singular only,1,0.0026455026455026454
+No gender distinctions,254,0.671957671957672

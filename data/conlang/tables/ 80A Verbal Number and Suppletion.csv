@@ -1,0 +1,6 @@
+value,count,percentage
+None,159,0.8238341968911918
+"Singular-plural pairs, no suppletion",12,0.06217616580310881
+"Singular-plural pairs, suppletion",15,0.07772020725388601
+"Singular-dual-plural triples, no suppletion",5,0.025906735751295335
+"Singular-dual-plural triples, suppletion",2,0.010362694300518135

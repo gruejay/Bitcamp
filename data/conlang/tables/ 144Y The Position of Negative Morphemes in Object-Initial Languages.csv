@@ -1,0 +1,12 @@
+value,count,percentage
+ONegVS,3,0.1875
+OVNegS,1,0.0625
+OSVNeg,1,0.0625
+O[V-Neg]S,4,0.25
+OS(Neg)[V(-Neg)],1,0.0625
+O[Neg-V-Neg]S,1,0.0625
+OVNegS/SOVNeg,1,0.0625
+NegOVS/NegSOV,1,0.0625
+O[V-Neg]S/SO[V-Neg],1,0.0625
+O[Neg-V]S/NegSVO,1,0.0625
+OVS & NegV,1,0.0625

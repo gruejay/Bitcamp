@@ -1,0 +1,7 @@
+value,count,percentage
+(Neg)[Neg-V-Neg],1,0.16666666666666666
+[V-Neg]Neg&OptNegInfix or Pref,1,0.16666666666666666
+NegVNeg/NegNegVNeg,1,0.16666666666666666
+Neg[V-Neg]/NegVNeg&NegTone,1,0.16666666666666666
+Neg[V(-Neg)]Neg/[Neg-V(-Neg)]Neg,1,0.16666666666666666
+Neg[V-(Neg)](Neg),1,0.16666666666666666

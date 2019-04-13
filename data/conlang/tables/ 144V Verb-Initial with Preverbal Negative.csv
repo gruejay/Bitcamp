@@ -1,0 +1,10 @@
+value,count,percentage
+"Separate word, no double negation  Word&NoDoubleNeg",117,0.7697368421052632
+"Prefix, no double negation  Prefix&NoDoubleNeg",11,0.07236842105263158
+Word&Opt,6,0.039473684210526314
+Prefix&OptDoubleNeg,1,0.006578947368421052
+Word&OnlyWithAnotherNeg,4,0.02631578947368421
+Prefix&OnlyWithAnotherNeg,1,0.006578947368421052
+Type 1 / Type 2,4,0.02631578947368421
+Type 3 / Type 6,1,0.006578947368421052
+No preverbal neg,7,0.046052631578947366

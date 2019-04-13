@@ -1,0 +1,166 @@
+---
+title: "Project 1"
+author: "Aviv Elazar-Mittelman"
+date: "March 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1: Data scraping and cleaning
+
+## Step 1: Scrape your competitor's data (10 pts)
+
+```{r step1}
+library(tidyverse)
+library(rvest)
+library(lubridate)
+swl_url <- "https://www.spaceweatherlive.com/en/solar-activity/top-50-solar-flares"
+
+#Load table into data_frame and create col names.
+swl_df <- read_html(swl_url) %>%
+  html_node(".table-responsive-md") %>%
+  html_table() %>% magrittr::set_colnames(c("rank","flare_classification","date","flare_region","start_time","maximum_time","end_time","movie"))
+
+swl_df %>% head(10)
+
+```
+
+## Step 2: Tidy the top 50 solar flare data
+```{r step2}
+swl_df <- swl_df[1:7] %>% unite("start_datetime",c("date", "start_time"),sep=" ", remove=FALSE) %>%
+  unite("maximum_datetime",c("date", "maximum_time"),sep=" ", remove=FALSE) %>%
+  unite("end_datetime",c("date", "end_time"),sep=" ", remove=FALSE) %>% .[c(1:5,7)] 
+  
+swl_df <- type_convert(swl_df, col_types = cols("start_datetime" = col_datetime("%Y/%m/%d %H:%M"), "maximum_datetime" = col_datetime("%Y/%m/%d %H:%M"), "end_datetime" = col_datetime("%Y/%m/%d %H:%M")))
+```
+
+## Step 3. Scrape the NASA data
+```{r step3}
+
+nasa_url <- "http://cdaw.gsfc.nasa.gov/CME_list/radio/waves_type2.html"
+
+nasa_lst <- read_html(nasa_url) %>%
+  html_node("pre") %>% 
+  html_text() %>%
+  str_split("\n")
+nasa_df <- nasa_lst[[1]] %>%
+  str_subset("(\\d{4}\\/.+PHTX)") %>%
+  as_tibble() %>% separate(value,c("start_date","start_time","end_date","end_time","start_frequency","end_frequency","flare_location","flare_region","flare_classification","cme_date","cme_time","cme_angle","cme_width","cme_speed"),sep="\\s+")
+nasa_df %>% head(10)
+```
+
+## Step 4: Tidy the NASA the table
+
+```{r step4}
+
+#setting missing data to NA
+nasa_df[nasa_df == "????"] <- NA
+nasa_df[nasa_df == "---"] <- NA
+nasa_df[nasa_df == "----"] <- NA
+nasa_df[nasa_df == "-----"] <- NA
+nasa_df[nasa_df == "------"] <- NA
+nasa_df[nasa_df == "Back?"] <- NA
+nasa_df[nasa_df == "BACK"] <- NA
+nasa_df[nasa_df == "--:--"] <- NA
+nasa_df[nasa_df == "--/--"] <- NA
+nasa_df[nasa_df == "altr"] <- NA
+nasa_df[nasa_df == "DIM"] <- NA
+nasa_df[nasa_df == "EP"] <- NA
+nasa_df[nasa_df == "EP?"] <- NA
+
+nasa_df <- mutate(nasa_df, halo = cme_angle == "Halo")
+nasa_df[nasa_df == "Halo"] <- NA
+
+nasa_df <-
+mutate(nasa_df, cme_width_limit = str_detect(cme_width, ">\\d+"))
+nasa_df$cme_width = gsub(">", "", nasa_df$cme_width)
+
+nasa_df[nasa_df == "24:00"] <- "00:00"
+nasa_df[nasa_df == "360h"] <- "360"
+
+#changing to datetime objects
+nasa_df <- nasa_df %>%
+unite("start_datetime", c("start_date", "start_time"), sep = " ") %>%
+unite("end_datetime", c("end_date", "end_time"), sep = " ") %>%
+unite("cme_datetime", c("cme_date", "cme_time"), sep = " ")
+nasa_df[nasa_df == "NA NA"] <- NA
+
+
+
+nasa_df <- type_convert(nasa_df, col_types = cols("start_datetime" = col_datetime("%Y/%m/%d %H:%M")))
+
+
+
+nasa_df$cme_datetime <- ifelse(is.na(nasa_df$cme_datetime),NA,paste(as.character(year(nasa_df$start_datetime)), "/", nasa_df$cme_datetime, sep ="", NULL))
+
+nasa_df$end_datetime <- paste(as.character(year(nasa_df$start_datetime)), "/", nasa_df$end_datetime, sep ="", NULL)
+
+#type conversion to proper types. 
+nasa_df <- type_convert(nasa_df,
+col_types = cols(
+"end_datetime" = col_datetime("%Y/%m/%d %H:%M"),"cme_datetime" = col_datetime("%Y/%m/%d %H:%M"),
+"start_frequency" = col_integer(),
+"end_frequency" = col_integer(),
+"cme_angle" = col_integer(),
+"cme_speed" = col_integer(),
+"cme_width" = col_integer(),
+"flare_region" = col_character()))
+
+
+nasa_df %>% head(10)
+
+```
+# Part 2: Analysis
+## Question 1: Replication
+```{r ques1}
+nasa_arranged <- nasa_df %>%
+  filter(flare_classification != "FILA") %>%
+  separate(flare_classification,c("Letter","Value"),sep=1) %>%
+  type_convert(col_types = cols("Value" = col_double())) %>%
+  arrange(desc(Letter),desc(Value)) %>%
+  unite(flare_classification,c("Letter","Value"), sep="")
+
+nasa_arranged %>% slice(1:50)
+```
+It seems as though SpaceWeatherLive has different events than the NASA table a they both contain many of the same events,
+but Space Weather Live seems to have a few that NASA doesn't with high classification, and NASA has some events with lower classification than SpaceWeatherLive. The tables are close in that their max is both X28, and their min is around X2 / X1.
+
+## Question 2: Entity Resolution
+```{r ques2}
+diff_to_similarity <- function(d) {
+  exp(-d)
+}
+
+flare_similarity <- function(date1,date2,class1,class2) {
+  d <- (as.integer(date1 - date2))^2
+  c <- ifelse(class1 == class2,5,0)
+  diff_to_similarity(d) + c
+}
+
+flare_match <- function(date1,class1) {
+  maxS <- 0
+  index <- -1
+  for (j in seq(1, nrow(nasa_df))) {
+    s <- flare_similarity(swl_df$start_datetime[i],
+                          nasa_df$start_datetime[j],
+                          swl_df$flare_classification[i],
+                          nasa_df$flare_classification[j])
+    maxS <- ifelse(maxS > s,maxS,s)
+      
+  }
+  
+}
+```
+## Question 3: Analysis
+```{r ques3}
+nasa_top_50 <- nasa_arranged %>% slice(1:50)
+nasa_rest <- nasa_arranged %>% slice(51:397)
+
+
+ggplot +
+  geom_point(data=nasa_top_50,aes(x=start_datetime,y=start_frequency), color='brown') + 
+  geom_point(data=nasa_rest,aes(x=start_datetime,y=start_frequency), color='black')
+```

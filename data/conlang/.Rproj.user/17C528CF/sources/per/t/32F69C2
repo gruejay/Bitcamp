@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555120743597.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1310589579",
+    "id" : "32F69C2",
+    "lastKnownWriteTime" : 1552708213,
+    "last_content_update" : 1552708213,
+    "path" : "~/LinuxWorkspace/320/Project1/test.Rmd",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,5 @@
+value,count,percentage
+Normal imperative + normal negative,113,0.22828282828282828
+Normal imperative + special negative,182,0.36767676767676766
+Special imperative + normal negative,55,0.1111111111111111
+Special imperative + special negative,145,0.29292929292929293

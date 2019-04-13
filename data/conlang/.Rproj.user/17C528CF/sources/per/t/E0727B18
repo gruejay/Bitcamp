@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555181540409.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "186205211",
+    "id" : "E0727B18",
+    "lastKnownWriteTime" : 1555181937,
+    "last_content_update" : 1555181937740,
+    "path" : "~/conlang/wals_value_table_getter.r",
+    "project_path" : "wals_value_table_getter.r",
+    "properties" : {
+        "cursorPosition" : "3,27",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 10,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

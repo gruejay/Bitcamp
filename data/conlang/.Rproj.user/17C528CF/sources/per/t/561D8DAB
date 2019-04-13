@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1555180494897.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "561D8DAB",
+    "lastKnownWriteTime" : 3419473787924512768,
+    "last_content_update" : 1555180494897,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "168fd2870f6d4166b2d9f806721266b0",
+        "name" : "dfs",
+        "title" : "dfs"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}

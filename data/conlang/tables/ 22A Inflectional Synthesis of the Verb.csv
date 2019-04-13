@@ -1,0 +1,8 @@
+value,count,percentage
+0-1 category per word,5,0.034482758620689655
+2-3 categories per word,24,0.16551724137931034
+4-5 categories per word,52,0.3586206896551724
+6-7 categories per word,31,0.21379310344827587
+8-9 categories per word,24,0.16551724137931034
+10-11 categories per word,7,0.04827586206896552
+12-13 categories per word,2,0.013793103448275862
