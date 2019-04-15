@@ -1,0 +1,7 @@
+package enumerations;
+
+public enum Manners {
+	
+	PLOSIVE,NASAL,TRILL,TAPFLAP,FRICATIVE,LATFRICATIVE,APPROXIMANT,LATAPPROX
+
+}
