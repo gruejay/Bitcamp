@@ -1,6 +1,9 @@
-# MADCLANG: A Collaborative Conlang Effort
+# MADCLang: A Collaborative Conlang Effort
 
 ## Development Path of MADCLANG
+
+### Origin
+
 
 ## Phonology Branch
 
