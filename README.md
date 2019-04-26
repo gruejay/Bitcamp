@@ -1,13 +1,13 @@
 # Bticamp
 
-##Development Path of MADCLANG
+## Development Path of MADCLANG
 
-##Phonology Branch
+## Phonology Branch
 
-##Syntax Branch
+## Syntax Branch
 
-##Morphology Branch
+## Morphology Branch
 
-##Semantics Branch
+## Semantics Branch
 
-##Data Branch
+## Data Branch
