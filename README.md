@@ -1,4 +1,4 @@
-# Bticamp
+# MADCLANG: A Collaborative Conlang Effort
 
 ## Development Path of MADCLANG
 
